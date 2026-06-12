@@ -1,6 +1,10 @@
 {
   "appsail": [
     {
+      "source": "./local-proxy-server",
+      "name": "proxy"
+    },
+    {
       "source": "./backend",
       "name": "notification-api"
     }
