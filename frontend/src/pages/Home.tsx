@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { usePushSubscription } from '../hooks/usePushSubscription';
 import { apiFetch } from '../services/api';
-import { getAuthUrls } from '../services/auth';
 import styles from './home.module.css';
 
 interface SendResult {
@@ -12,9 +11,7 @@ interface SendResult {
 
 export default function Home() {
   const { user } = useAuth();
-  const { isSubscribed, loading: subLoading, subscribe, unsubscribe } = usePushSubscription(
-    user!.email_id
-  );
+  const { isSubscribed, loading: subLoading, subscribe, unsubscribe } = usePushSubscription(user!.email_id);
 
   const [recipientEmail, setRecipientEmail] = useState('');
   const [title, setTitle] = useState('');
@@ -23,13 +20,8 @@ export default function Home() {
   const [result, setResult] = useState<SendResult | null>(null);
   const [error, setError] = useState('');
 
-  const handleLogout = async () => {
-    try {
-      const { logoutUrl } = await getAuthUrls();
-      window.location.href = logoutUrl;
-    } catch {
-      window.location.href = '/login';
-    }
+  const handleLogout = () => {
+    window.location.href = '/app/logout';
   };
 
   const handleSend = async (e: React.FormEvent) => {

@@ -1,5 +1,5 @@
 {
-  "command": "npm start",
+  "command": "npm run dev",
   "build_path": "./",
   "stack": "node20",
   "env_variables": {},

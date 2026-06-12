@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import { Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function ProtectedRoute({ children }: { children: ReactNode }) {
@@ -13,7 +12,10 @@ export default function ProtectedRoute({ children }: { children: ReactNode }) {
     );
   }
 
-  if (!user) return <Navigate to="/login" replace />;
+  if (!user) {
+    window.location.href = `/app/login?redirect=${encodeURIComponent(window.location.pathname)}`;
+    return null;
+  }
 
   return <>{children}</>;
 }
