@@ -13,7 +13,7 @@ export default function ProtectedRoute({ children }: { children: ReactNode }) {
   }
 
   if (!user) {
-    window.location.href = `/app/login?redirect=${encodeURIComponent(window.location.pathname)}`;
+    window.location.href = `/__catalyst/auth/login?redirect=${encodeURIComponent(window.location.pathname)}`;
     return null;
   }
 

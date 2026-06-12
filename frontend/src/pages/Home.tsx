@@ -21,7 +21,7 @@ export default function Home() {
   const [error, setError] = useState('');
 
   const handleLogout = () => {
-    window.location.href = '/app/logout';
+    window.location.href = '/__catalyst/auth/logout';
   };
 
   const handleSend = async (e: React.FormEvent) => {
