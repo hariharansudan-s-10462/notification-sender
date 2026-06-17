@@ -5,7 +5,7 @@
       "name": "proxy"
     },
     {
-      "source": "./backend",
+      "source": "./app",
       "name": "notification-api"
     }
   ]

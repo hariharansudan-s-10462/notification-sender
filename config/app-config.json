@@ -1,0 +1,15 @@
+{
+  "command": "node ./dist/index.js",
+  "build_path": "./",
+  "stack": "node20",
+  "env_variables": {
+    "NODE_ENV": "production",
+    "VAPID_PUBLIC_KEY": "BNBW8t4wm4a2_dkdyw5X6NCeax1iL8FT7jlhoYjKRcWnCTQBKsGkqZ7lCdsU-Gk-dkzF0Fmv0RFsjh0qIiBRIPg",
+    "VAPID_PRIVATE_KEY": "woCKyszUtxmdFSm4qo7n6frXUCeCschBk1A9QCvV0Ss",
+    "VAPID_SUBJECT": "mailto:admin@example.com"
+  },
+  "memory": 256,
+  "scripts": {},
+  "catalyst_auth": true,
+  "login_redirect": "/"
+}
