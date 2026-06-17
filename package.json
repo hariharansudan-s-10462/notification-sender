@@ -1,16 +1,17 @@
 {
   "name": "notification-sender",
-  "version": "0.0.1",
   "private": true,
+  "version": "0.0.0",
   "scripts": {
-    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:catalyst\"",
-    "dev:frontend": "cd frontend && npm run dev",
-    "dev:backend": "cd backend && npm run dev",
-    "dev:catalyst": "catalyst serve",
-    "build": "cd backend && npm run build:all",
-    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install && cd ../local-proxy-server && npm install"
+    "proxy": "catalyst serve --only appsail:proxy",
+    "frontend": "cd frontend && npm run dev",
+    "backend": "cd backend && npm run dev",
+    "dev": "npm run frontend 2>&1 | sed $'s/^/\\e[33m[frontend]\\e[0m /' & npm run backend 2>&1 | sed $'s/^/\\e[36m[backend]\\e[0m /' & npm run proxy 2>&1 | sed $'s/^/\\e[32m[proxy]\\e[0m /' ",
+    "build": "npm run build --prefix frontend && npm run build --prefix backend && npx bundlify",
+    "install:all": "npm install --prefix frontend && npm install --prefix backend && npm install --prefix local-proxy-server"
   },
   "devDependencies": {
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.1.0",
+    "@catalyst-solutions/bundlify": "^1.0.0"
   }
 }
