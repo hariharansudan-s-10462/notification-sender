@@ -4,11 +4,12 @@ module.exports = {
   rules: [
     {
       type: "bundle",
-      src: "backend/dist",
+      src: "backend/dist/index.js",
       rewritePath: (destPath) =>
         destPath
           .replace("/backend/dist/", "/dist/")
-          .replace("/backend/node_modules/", "/node_modules/"),
+          .replace("/backend/node_modules/", "/node_modules/")
+          .replace("/backend/package.json", "/package.json"),
     },
     {
       type: "static",

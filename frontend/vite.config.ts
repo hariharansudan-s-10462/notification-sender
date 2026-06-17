@@ -10,17 +10,34 @@ export default defineConfig({
       strategies: 'generateSW',
       workbox: {
         importScripts: ['/sw-push.js'],
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        globPatterns: ['**/*.html'],
+        navigateFallback: 'index.html',
+        runtimeCaching: [],
       },
       manifest: {
         name: 'Notification Sender',
         short_name: 'NotifySend',
         description: 'Send push notifications to subscribed users',
         theme_color: '#1e40af',
-        background_color: '#ffffff',
+        background_color: '#1e40af',
         display: 'standalone',
         start_url: '/',
+        scope: '/',
+        id: '/',
+        orientation: 'portrait',
         icons: [
+          {
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable',
+          },
           {
             src: 'favicon.svg',
             sizes: 'any',
