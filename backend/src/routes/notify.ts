@@ -29,6 +29,7 @@ router.post('/send-notification', requireAuth, async (req, res) => {
         `SELECT ROWID, endpoint, p256dh, auth_key FROM ${TABLE} WHERE email = '${safeEmail}'`
       )) as ZcqlRow[];
 
+    console.log(`Found ${rows.length} subscription(s) for ${recipientEmail}`);
     let sent = 0;
     let failed = 0;
     const staleRowIds: string[] = [];
@@ -46,7 +47,8 @@ router.post('/send-notification', requireAuth, async (req, res) => {
           );
           sent++;
         } catch (err) {
-          const pushErr = err as { statusCode?: number };
+          const pushErr = err as { statusCode?: number; body?: string; message?: string };
+          console.error('webpush failed:', pushErr.statusCode, pushErr.body ?? pushErr.message);
           if (pushErr.statusCode === 410 && record.ROWID) {
             staleRowIds.push(record.ROWID);
           }
