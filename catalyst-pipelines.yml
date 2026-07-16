@@ -1,17 +1,65 @@
 version: 1.0
+
 jobs:
-  hello:
+  install-root:
     steps:
-      - echo "Hello"
-  world:
+      - npm ci
+
+  install-frontend:
     steps:
-      - echo "World"
-  hello-world:
+      - npm ci --prefix frontend
+
+  install-backend:
     steps:
-      - echo "Hello World!"
+      - npm ci --prefix backend
+
+  install-proxy:
+    steps:
+      - npm ci --prefix local-proxy-server
+
+  lint-frontend:
+    steps:
+      - npm run lint --prefix frontend
+
+  build-frontend:
+    steps:
+      - npm run build --prefix frontend
+
+  build-backend:
+    steps:
+      - npm run build --prefix backend
+
+  bundle:
+    steps:
+      - npx bundlify
+
+  deploy-api:
+    steps:
+      - catalyst deploy --only appsail:notification-api
+
+  deploy-proxy:
+    steps:
+      - catalyst deploy --only appsail:proxy
+
 stages:
+  - name: install
+    jobs:
+      - - install-root
+        - install-frontend
+        - install-backend
+        - install-proxy
+
+  - name: lint
+    jobs:
+      - lint-frontend
+
   - name: build
     jobs:
-      - - hello
-        - world
-      - hello-world
+      - - build-frontend
+        - build-backend
+      - bundle
+
+  - name: deploy
+    jobs:
+      - - deploy-api
+        - deploy-proxy
