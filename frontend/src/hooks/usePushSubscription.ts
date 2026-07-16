@@ -25,8 +25,7 @@ export function usePushSubscription(userEmail: string) {
       setLoading(false);
       return;
     }
-
-    navigator.serviceWorker.ready
+    navigator.serviceWorker.register('/sw-push.js')
       .then((reg) => {
         setRegistration(reg);
         return reg.pushManager.getSubscription();

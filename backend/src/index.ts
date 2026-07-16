@@ -8,7 +8,7 @@ import subscriptionsRouter from './routes/subscriptions';
 import notifyRouter from './routes/notify';
 
 const app = express();
-const PORT = parseInt(process.env.PORT ?? '3000', 10);
+const PORT = parseInt(process.env.X_ZOHO_CATALYST_LISTEN_PORT ?? '3001', 10);
 const isProduction = process.env.NODE_ENV === 'production';
 
 app.use(

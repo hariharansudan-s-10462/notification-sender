@@ -33,6 +33,16 @@ router.post('/subscriptions', requireAuth, async (req, res) => {
         p256dh: keys.p256dh,
         auth_key: keys.auth,
       });
+    } else {
+      const rowId = (existing as ZcqlRow[])[0][TABLE]?.ROWID;
+      if (rowId) {
+        await catalystApp.datastore().table(TABLE).updateRow({
+          ROWID: rowId,
+          email,
+          p256dh: keys.p256dh,
+          auth_key: keys.auth,
+        });
+      }
     }
 
     res.json({ success: true });

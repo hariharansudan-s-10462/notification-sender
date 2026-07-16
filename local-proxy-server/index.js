@@ -21,6 +21,7 @@ const proxyHandler = httpProxy.createProxyServer({
 });
 
 proxyHandler.on("error", (err, req, res) => {
+  console.error(JSON.stringify({ message: "Proxy error", error: err.message }));
   console.error("Proxy error:", err.message);
   res.writeHead(502, { "Content-Type": "application/json" });
   res.end(JSON.stringify({ code: "FAILURE", message: "Service unavailable" }));
