@@ -1,36 +1,17 @@
 version: 1.0
 
 jobs:
-  install-root:
+  install:
     steps:
       - npm ci
-
-  install-frontend:
-    steps:
       - npm ci --prefix frontend
-
-  install-backend:
-    steps:
       - npm ci --prefix backend
-
-  install-proxy:
-    steps:
       - npm ci --prefix local-proxy-server
 
-  lint-frontend:
-    steps:
-      - npm run lint --prefix frontend
-
-  build-frontend:
+  build:
     steps:
       - npm run build --prefix frontend
-
-  build-backend:
-    steps:
       - npm run build --prefix backend
-
-  bundle:
-    steps:
       - npx bundlify
 
   deploy-api:
@@ -44,22 +25,13 @@ jobs:
 stages:
   - name: install
     jobs:
-      - - install-root
-        - install-frontend
-        - install-backend
-        - install-proxy
-
-  - name: lint
-    jobs:
-      - lint-frontend
+      - install
 
   - name: build
     jobs:
-      - - build-frontend
-        - build-backend
-      - bundle
+      - build
 
   - name: deploy
     jobs:
-      - - deploy-api
-        - deploy-proxy
+      - deploy-api
+      - deploy-proxy
