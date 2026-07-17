@@ -3,10 +3,10 @@ version: 1.0
 jobs:
   install:
     steps:
-      - npm ci
-      - npm ci --prefix frontend
-      - npm ci --prefix backend
-      - npm ci --prefix local-proxy-server
+      - npm install
+      - npm install --prefix frontend
+      - npm install --prefix backend
+      - npm install --prefix local-proxy-server
 
   build:
     steps:
