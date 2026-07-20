@@ -9,3 +9,5 @@ frontend/dist/
 backend/dist/
 backend/public/
 app
+lib/*.tgz
+package-lock.json

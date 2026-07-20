@@ -3,6 +3,7 @@ version: 1.0
 jobs:
   install:
     steps:
+      - cd lib/bundlify && npm install && npm run build && npm pack --pack-destination ../
       - npm install
       - npm install --prefix frontend
       - npm install --prefix backend

@@ -12,6 +12,6 @@
   },
   "devDependencies": {
     "concurrently": "^9.1.0",
-    "@catalyst-solutions/bundlify": "^1.0.0"
+    "@catalyst-solutions/bundlify": "file:lib/catalyst-solutions-bundlify-1.0.0.tgz"
   }
 }
